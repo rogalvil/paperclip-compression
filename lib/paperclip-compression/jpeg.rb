@@ -19,7 +19,7 @@ module PaperclipCompression
     def make
       begin
         if @cli_opts
-          Paperclip.run(command_path('jpegoptim'), "#{@cli_opts} :src_path > :dst_path", src_path: @src_path, dst_path: @dst_path)
+          Paperclip.run(system('jpegoptim'), "#{@cli_opts} :src_path > :dst_path", src_path: @src_path, dst_path: @dst_path)
           @dst
         else
           @file

@@ -1,3 +1,4 @@
+#encoding: utf-8
 module Paperclip
   # Compresses the JPEG and PNG files
   class Compression < Processor

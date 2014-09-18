@@ -1,3 +1,4 @@
+#encoding: utf-8
 module PaperclipCompression
   class Png < Base
 

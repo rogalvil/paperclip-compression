@@ -2,7 +2,7 @@ module PaperclipCompression
   class Jpeg < Base
 
     JPEGOPTIM_DEFAULT_OPTS = '--max=90 --strip-all --preserve --totals –all-progressive'
-
+    
     def initialize(file, options = {})
       super(file, options)
 

@@ -1,7 +1,7 @@
 module PaperclipCompression
   class Jpeg < Base
 
-    JPEGTRAN_DEFAULT_OPTS = '-copy none -optimize -perfect'
+    JPEGOPTIM_DEFAULT_OPTS = '--max=90 --strip-all --preserve --totals –all-progressive'
 
     def initialize(file, options = {})
       super(file, options)
@@ -18,22 +18,22 @@ module PaperclipCompression
     def make
       begin
         if @cli_opts
-          Paperclip.run(command_path('jpegtran'), "#{@cli_opts} :src_path > :dst_path", src_path: @src_path, dst_path: @dst_path)
+          Paperclip.run(command_path('jpegoptim'), "#{@cli_opts} :src_path > :dst_path", src_path: @src_path, dst_path: @dst_path)
           @dst
         else
           @file
         end
       rescue Cocaine::ExitStatusError => e
-        raise Paperclip::Error, "JPEGTRAN : There was an error processing the thumbnail for #{@basename}" if @whiny
+        raise Paperclip::Error, "jpegoptim : There was an error processing the thumbnail for #{@basename}" if @whiny
       rescue Cocaine::CommandNotFoundError => e
-        raise Paperclip::Errors::CommandNotFoundError.new("Could not run 'jpegtran'. Please install jpegtran.")
+        raise Paperclip::Errors::CommandNotFoundError.new("Could not run 'jpegoptim'. Please install jpegoptim.")
       end
     end
 
     private
 
     def default_opts
-      JPEGTRAN_DEFAULT_OPTS
+      JPEGOPTIM_DEFAULT_OPTS
     end
 
   end
